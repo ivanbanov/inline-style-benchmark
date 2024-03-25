@@ -1,0 +1,107 @@
+<html>
+<html lang="en">
+<head>
+  <title>Benchmark - inline style</title>
+  <style>
+    :root { 
+      --background-parent: red;
+      --background-child: blue;
+    }
+    button {
+      margin: 10px;
+    }
+    body {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    body > div { 
+      flex: 1;
+      height: 50px; 
+      width: 50px;
+      /* background-color: var(--background-parent); */
+    }
+    div > div {
+      color: white;
+      margin: 5px;
+      width: 40px;
+      height: 40px;
+      /* background-color: var(--background-child); */
+    }
+
+    .green { background-color: green; }
+  </style>
+</head>
+<body>
+  <span>
+    Class:
+    <button onclick="changeParentsClassName()">Change parents class name</button>
+    <button onclick="changeChildrenClassName()">Change children class name</button>
+  </span>
+  
+  <span>
+    CSS var:
+    <button onclick="changeParentsCSSVar()">Change parents CSS variable</button>
+    <button onclick="changeChildrenCSSVar()">Change children CSS variable</button>
+  </span>
+  
+  <span>
+    Style attr:
+    <button onclick="changeParentsStyleAttr()">Change parents style attribute</button>
+    <button onclick="changeChildrenStyleAttr()">Change children style attribute</button>
+  </span>
+
+  <hr style="flex: 0 100%;" />
+  
+  <script>
+    // Class
+    function changeParentsClassName() {
+      document.querySelectorAll('body > div').forEach(div => {
+        div.className = 'green';
+      });
+    }
+    function changeChildrenClassName() {
+      document.querySelectorAll('div div').forEach(div => {
+        div.className = 'green';
+      });
+    }
+
+
+    // CSS var
+    function changeParentsCSSVar() {
+      document.documentElement.style.setProperty('--background-parent', 'green');
+    }
+    function changeChildrenCSSVar() {
+      document.documentElement.style.setProperty('--background-child', 'green');
+    }
+
+    // Style attribute
+    function changeParentsStyleAttr() {
+      document.querySelectorAll('body > div').forEach(div => {
+        div.style.background = 'green';
+      });
+    }
+    function changeChildrenStyleAttr() {
+      document.querySelectorAll('div div').forEach(div => {
+        div.style.background = 'green';
+      });
+    }
+
+    // Benchmark
+    function renderDivs() {
+      const container = document.body;
+      for (let i = 1; i <= 5000; i++) {
+        const div = document.createElement('div');
+        div.style.background = 'var(--background-parent)';
+        container.appendChild(div);
+
+        const child = document.createElement('div');
+        child.style.background = 'var(--background-child)';
+        child.textContent = i;
+        div.appendChild(child);
+      }
+    }
+
+    renderDivs();
+  </script>
+</body>
+</html>
