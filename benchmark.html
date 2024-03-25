@@ -18,14 +18,14 @@
       flex: 1;
       height: 50px; 
       width: 50px;
-      /* background-color: var(--background-parent); */
+      background-color: var(--background-parent);
     }
     div > div {
       color: white;
       margin: 5px;
       width: 40px;
       height: 40px;
-      /* background-color: var(--background-child); */
+      background-color: var(--background-child);
     }
 
     .green { background-color: green; }
@@ -48,6 +48,18 @@
     Style attr:
     <button onclick="changeParentsStyleAttr()">Change parents style attribute</button>
     <button onclick="changeChildrenStyleAttr()">Change children style attribute</button>
+  </span>
+
+  <span>
+    Inject style tag:
+    <button onclick="injectParentStyleTag()">Inject parents style tag</button>
+    <button onclick="injectChildStyleTag()">Inject children style tag</button>
+  </span>
+
+  <span>
+    Use insertRule:
+    <button onclick="injectParentStyleTag()">InsertRule parents</button>
+    <button onclick="injectChildStyleTag()">InsertRule children</button>
   </span>
 
   <hr style="flex: 0 100%;" />
@@ -86,16 +98,51 @@
       });
     }
 
+    // Inject style tag
+    function injectParentStyleTag() {
+      for (let i = 1; i <= 5000; i++) {
+      const style = document.createElement('style');
+        style.textContent += `.x${i} { background-color: green; }`;
+        document.head.appendChild(style);
+      }
+    }
+
+    function injectChildStyleTag() {
+      for (let i = 1; i <= 5000; i++) {
+      const style = document.createElement('style');
+        style.textContent += `.x${i} > div { background-color: green; }`;
+        document.head.appendChild(style);
+      }
+    }
+
+    // Use insertRule
+    function injectParentStyleTag() {
+      const style = document.querySelector('style');
+      const sheet = style.sheet;
+      for (let i = 1; i <= 5000; i++) {
+        sheet.insertRule(`.x${i} { background-color: green; }`);
+      }
+    }
+
+    function injectChildStyleTag() {
+      const style = document.querySelector('style');
+      const sheet = style.sheet;
+      for (let i = 1; i <= 5000; i++) {
+        sheet.insertRule(`.x${i} > div { background-color: green; }`);
+      }
+    }
+
     // Benchmark
     function renderDivs() {
       const container = document.body;
       for (let i = 1; i <= 5000; i++) {
         const div = document.createElement('div');
-        div.style.background = 'var(--background-parent)';
+        // div.style.background = 'var(--background-parent)';
+        div.classList.add(`x${i}`);
         container.appendChild(div);
 
         const child = document.createElement('div');
-        child.style.background = 'var(--background-child)';
+        // child.style.background = 'var(--background-child)';
         child.textContent = i;
         div.appendChild(child);
       }
