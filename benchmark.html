@@ -28,7 +28,8 @@
       background-color: var(--background-child);
     }
 
-    .green { background-color: green; }
+    .parent-green { --background-parent: green; }
+    .child-green { --background-child: green; }
   </style>
 </head>
 <body>
@@ -68,12 +69,12 @@
     // Class
     function changeParentsClassName() {
       document.querySelectorAll('body > div').forEach(div => {
-        div.className = 'green';
+        div.className = 'parent-green';
       });
     }
     function changeChildrenClassName() {
       document.querySelectorAll('div div').forEach(div => {
-        div.className = 'green';
+        div.className = 'child-green';
       });
     }
 
