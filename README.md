@@ -9,3 +9,7 @@ Report available in the [google sheets](https://docs.google.com/spreadsheets/d/1
 ## How is it measured?
 
 ![](./profiling.gif)
+
+### Wouldn't be better to automate it?
+
+Yes but I do not have time for it now, PRs are welcome.
