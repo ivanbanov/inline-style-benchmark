@@ -5,3 +5,7 @@ Report available in the [google sheets](https://docs.google.com/spreadsheets/d/1
 -----
 
 ![](./report.png)
+
+## How is it measured?
+
+![](./profiling.gif)
