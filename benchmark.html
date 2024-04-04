@@ -13,6 +13,7 @@
     body {
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
     }
     body > div { 
       flex: 1;
@@ -28,128 +29,175 @@
       background-color: var(--background-child);
     }
 
-    .parent-green { --background-parent: green; }
-    .child-green { --background-child: green; }
+    hr {
+      flex: 0 100%;
+    }
+
+    .parent-green-cssvar { --background-parent: green; }
+    .child-green-cssvar { --background-child: green; }
+    .parent-green-raw { background: green; }
+    .child-green-raw { background: green; }
   </style>
 </head>
 <body>
-  <span>
-    Class:
-    <button onclick="changeParentsClassName()">Change parents class name</button>
-    <button onclick="changeChildrenClassName()">Change children class name</button>
-  </span>
+  <span>Classname (raw value):</span>
+  <button onclick="changeParentsClassNameRawValue()">parent</button>
+  <button onclick="changeChildrenClassNameRawValue()">children</button>
+  <hr />
+  <span>Classname (CSS var):</span>
+  <button onclick="changeParentsClassNameCSSVar()">parent</button>
+  <button onclick="changeChildrenClassNameCSSVar()">children</button>
+  <hr />
+  <span>Document CSS var: </span>
+  <button onclick="changeParentsDocumentCSSVar()">parent</button>
+  <button onclick="changeChildrenDocumentCSSVar()">children</button>
+  <hr />
+  <span>Style attribute (raw value):</span>
+  <button onclick="changeParentsStyleAttrRawValue()">parent</button>
+  <button onclick="changeChildrenStyleAttrRawValue()">children</button>
+  <hr />
+  <span>Style attribute (CSS var):</span>
+  <button onclick="changeParentsStyleAttrCSSVar()">parent</button>
+  <button onclick="changeChildrenStyleAttrCSSVar()">children</button>
+  <hr />
+  <span>Inject style tag: </span>
+  <button onclick="injectParentStyleTag()">parent</button>
+  <button onclick="injectChildStyleTag()">children</button>
+  <hr />
+  <span>Insert rule (raw value): </span>
+  <button onclick="insertRuleParentRawValue()">parent</button>
+  <button onclick="insertRuleChildRawValue()">children</button>
+  <hr />
+  <span>Insert rule (CSS var): </span>
+  <button onclick="insertRuleParentCSSVar()">parent</button>
+  <button onclick="insertRuleChildCSSVar()">children</button>
+  <hr />
   
-  <span>
-    CSS var:
-    <button onclick="changeParentsCSSVar()">Change parents CSS variable</button>
-    <button onclick="changeChildrenCSSVar()">Change children CSS variable</button>
-  </span>
-  
-  <span>
-    Style attr:
-    <button onclick="changeParentsStyleAttr()">Change parents style attribute</button>
-    <button onclick="changeChildrenStyleAttr()">Change children style attribute</button>
-  </span>
 
-  <span>
-    Inject style tag:
-    <button onclick="injectParentStyleTag()">Inject parents style tag</button>
-    <button onclick="injectChildStyleTag()">Inject children style tag</button>
-  </span>
-
-  <span>
-    Use insertRule:
-    <button onclick="injectParentStyleTag()">InsertRule parents</button>
-    <button onclick="injectChildStyleTag()">InsertRule children</button>
-  </span>
-
-  <hr style="flex: 0 100%;" />
   
   <script>
-    // Class
-    function changeParentsClassName() {
+    // Class raw value
+    function changeParentsClassNameRawValue() {
       document.querySelectorAll('body > div').forEach(div => {
-        div.className = 'parent-green';
-      });
+        div.className = 'parent-green-raw'
+      })
     }
-    function changeChildrenClassName() {
+    function changeChildrenClassNameRawValue() {
       document.querySelectorAll('div div').forEach(div => {
-        div.className = 'child-green';
-      });
+        div.className = 'child-green-raw'
+      })
     }
 
-
-    // CSS var
-    function changeParentsCSSVar() {
-      document.documentElement.style.setProperty('--background-parent', 'green');
-    }
-    function changeChildrenCSSVar() {
-      document.documentElement.style.setProperty('--background-child', 'green');
-    }
-
-    // Style attribute
-    function changeParentsStyleAttr() {
+    // Class CSS var
+    function changeParentsClassNameCSSVar() {
       document.querySelectorAll('body > div').forEach(div => {
-        div.style.background = 'green';
-      });
+        div.className = 'parent-green-cssvar'
+      })
     }
-    function changeChildrenStyleAttr() {
+    function changeChildrenClassNameCSSVar() {
       document.querySelectorAll('div div').forEach(div => {
-        div.style.background = 'green';
-      });
+        div.className = 'child-green-cssvar'
+      })
+    }
+
+    // Document CSS var
+    function changeParentsDocumentCSSVar() {
+      document.documentElement.style.setProperty('--background-parent', 'green')
+    }
+    function changeChildrenDocumentCSSVar() {
+      document.documentElement.style.setProperty('--background-child', 'green')
+    }
+
+    // Style attribute raw value
+    function changeParentsStyleAttrRawValue() {
+      document.querySelectorAll('body > div').forEach(div => {
+        div.style.background = 'green'
+      })
+    }
+    function changeChildrenStyleAttrRawValue() {
+      document.querySelectorAll('div div').forEach(div => {
+        div.style.background = 'green'
+      })
+    }
+
+    // Style attribute CSS var
+    function changeParentsStyleAttrCSSVar() {
+      document.querySelectorAll('body > div').forEach(div => {
+        div.style.setProperty('--background-parent', 'green')
+      })
+    }
+    function changeChildrenStyleAttrCSSVar() {
+      document.querySelectorAll('div div').forEach(div => {
+        div.style.setProperty('--background-child', 'green')
+      })
     }
 
     // Inject style tag
     function injectParentStyleTag() {
       for (let i = 1; i <= 5000; i++) {
-      const style = document.createElement('style');
-        style.textContent += `.x${i} { background-color: green; }`;
-        document.head.appendChild(style);
+      const style = document.createElement('style')
+        style.textContent += `.x${i} { background-color: green }`
+        document.head.appendChild(style)
       }
     }
 
     function injectChildStyleTag() {
       for (let i = 1; i <= 5000; i++) {
-      const style = document.createElement('style');
-        style.textContent += `.x${i} > div { background-color: green; }`;
-        document.head.appendChild(style);
+      const style = document.createElement('style')
+        style.textContent += `.x${i} > div { background-color: green }`
+        document.head.appendChild(style)
       }
     }
 
     // Use insertRule
-    function injectParentStyleTag() {
-      const style = document.querySelector('style');
-      const sheet = style.sheet;
+    function insertRuleParentRawValue() {
+      const sheet = new CSSStyleSheet()
       for (let i = 1; i <= 5000; i++) {
-        sheet.insertRule(`.x${i} { background-color: green; }`);
+        sheet.insertRule(`.x${i} { background-color: green }`)
       }
+      document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
     }
 
-    function injectChildStyleTag() {
-      const style = document.querySelector('style');
-      const sheet = style.sheet;
+    function insertRuleChildRawValue() {
+      const sheet = new CSSStyleSheet()
       for (let i = 1; i <= 5000; i++) {
-        sheet.insertRule(`.x${i} > div { background-color: green; }`);
+        sheet.insertRule(`.x${i} > div { background-color: green }`)
       }
+      document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
+    }
+
+    // Use insertRule with CSS var
+    function insertRuleParentCSSVar() {
+      const sheet = new CSSStyleSheet()
+      for (let i = 1; i <= 5000; i++) {
+        sheet.insertRule(`.x${i} { --background-parent: green }`)
+      }
+      document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
+    }
+
+    function insertRuleChildCSSVar() {
+      const sheet = new CSSStyleSheet()
+      for (let i = 1; i <= 5000; i++) {
+        sheet.insertRule(`.x${i} > div { --background-child: green }`)
+      }
+      document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
     }
 
     // Benchmark
     function renderDivs() {
-      const container = document.body;
+      const container = document.body
       for (let i = 1; i <= 5000; i++) {
-        const div = document.createElement('div');
-        // div.style.background = 'var(--background-parent)';
-        div.classList.add(`x${i}`);
-        container.appendChild(div);
+        const div = document.createElement('div')
+        div.classList.add(`x${i}`)
+        container.appendChild(div)
 
-        const child = document.createElement('div');
-        // child.style.background = 'var(--background-child)';
-        child.textContent = i;
-        div.appendChild(child);
+        const child = document.createElement('div')
+        child.textContent = i
+        div.appendChild(child)
       }
     }
 
-    renderDivs();
+    renderDivs()
   </script>
 </body>
 </html>
