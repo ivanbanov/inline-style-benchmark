@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "machine": "Apple M5 Pro 69gb",
+    "domNodes": 5000,
+    "runs": 5,
+    "timeUnit": "ms",
+    "note": "Headless Chromium via Playwright + CDP tracing. Values are medians."
+  },
+  "tables": {
+    "no-throttling": [
+      {
+        "technique": "element style attr",
+        "parentRender": 2,
+        "parentPainting": 7.2,
+        "childRender": 2.2,
+        "childPainting": 6.7
+      },
+      {
+        "technique": "element style attr with cssvar",
+        "parentRender": 4.4,
+        "parentPainting": 5.6,
+        "childRender": 2.6,
+        "childPainting": 9.7
+      },
+      {
+        "technique": "<html> style attr with cssvar",
+        "parentRender": 4.4,
+        "parentPainting": 6.8,
+        "childRender": 4.5,
+        "childPainting": 9.3
+      },
+      {
+        "technique": "class",
+        "parentRender": 2,
+        "parentPainting": 7.6,
+        "childRender": 2.2,
+        "childPainting": 6.6
+      },
+      {
+        "technique": "class with cssvar",
+        "parentRender": 4.3,
+        "parentPainting": 7.1,
+        "childRender": 2.5,
+        "childPainting": 7.7
+      },
+      {
+        "technique": "insertRule",
+        "parentRender": 3.4,
+        "parentPainting": 6.7,
+        "childRender": 44.5,
+        "childPainting": 7.3
+      },
+      {
+        "technique": "insertRule with cssvar",
+        "parentRender": 5.7,
+        "parentPainting": 6.8,
+        "childRender": 44.8,
+        "childPainting": 8.2
+      },
+      {
+        "technique": "inject style tag",
+        "parentRender": 259,
+        "parentPainting": 6.8,
+        "childRender": 514.2,
+        "childPainting": 5
+      }
+    ],
+    "6x-throttling": [
+      {
+        "technique": "element style attr",
+        "parentRender": 13.2,
+        "parentPainting": 29.5,
+        "childRender": 14.4,
+        "childPainting": 29.5
+      },
+      {
+        "technique": "element style attr with cssvar",
+        "parentRender": 28,
+        "parentPainting": 31.7,
+        "childRender": 15.9,
+        "childPainting": 28.6
+      },
+      {
+        "technique": "<html> style attr with cssvar",
+        "parentRender": 27.3,
+        "parentPainting": 30.4,
+        "childRender": 28.3,
+        "childPainting": 36.7
+      },
+      {
+        "technique": "class",
+        "parentRender": 12.3,
+        "parentPainting": 33.2,
+        "childRender": 14,
+        "childPainting": 32
+      },
+      {
+        "technique": "class with cssvar",
+        "parentRender": 27.5,
+        "parentPainting": 26.4,
+        "childRender": 16.4,
+        "childPainting": 25.9
+      },
+      {
+        "technique": "insertRule",
+        "parentRender": 23,
+        "parentPainting": 29.9,
+        "childRender": 282.6,
+        "childPainting": 23.3
+      },
+      {
+        "technique": "insertRule with cssvar",
+        "parentRender": 38.1,
+        "parentPainting": 33,
+        "childRender": 288.5,
+        "childPainting": 24.4
+      },
+      {
+        "technique": "inject style tag",
+        "parentRender": 1613.9,
+        "parentPainting": 28.8,
+        "childRender": 3239.2,
+        "childPainting": 25.9
+      }
+    ]
+  }
+}

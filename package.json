@@ -1,0 +1,13 @@
+{
+  "name": "inline-style-benchmark",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Automated CSS styling-performance benchmark (Playwright + CDP tracing)",
+  "scripts": {
+    "benchmark": "node benchmark.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.1"
+  }
+}
