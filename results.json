@@ -1,6 +1,6 @@
 {
   "meta": {
-    "machine": "Apple M5 Pro 69gb",
+    "machine": "MacBook Pro Apple M5 Pro 64GB",
     "domNodes": 5000,
     "runs": 5,
     "timeUnit": "ms",

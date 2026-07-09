@@ -131,7 +131,7 @@ async function main() {
   const browser = await chromium.launch()
   const results = {
     meta: {
-      machine: `${os.cpus()[0].model} ${Math.round(os.totalmem() / 1e9)}gb`,
+      machine: `${os.cpus()[0].model} ${Math.round(os.totalmem() / 1024 ** 3)}GB`,
       domNodes: 5000,
       runs: RUNS,
       timeUnit: 'ms',
